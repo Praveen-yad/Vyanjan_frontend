@@ -37,7 +37,10 @@ function Slider() {
         modules={[EffectCoverflow, Pagination]}
         breakpoints={{
           10:{
-            spaceBetween:-130
+            spaceBetween:-140
+          },
+          450:{
+              spaceBetween:-20
           },
           768:{
             spaceBetween:-170
@@ -49,11 +52,11 @@ function Slider() {
             spaceBetween:1
           }
         }}
-        className="2xl:w-[80rem] xl:w-[70rem] lg:w-[60rem] md:w-[47rem] sm:w-[35rem] overflow-visible w-[24rem]"
+        className="2xl:w-[80rem] xl:w-[70rem] lg:w-[60rem] md:w-[47rem] sm:w-[35rem] overflow-visible xxs:w-[27rem] w-[23rem] "
       >
         {a.map((item, index) => (
         <SwiperSlide key={index} className="">
-          <div className="w-[28rem] h-[23.5rem] bg-white backdrop-blur-md bg-opacity-20 rounded-3xl overflow-hidden p-3 font-poppins scale-[0.4] sm:scale-[0.5] md:scale-[0.7] lg:scale-[0.7] xl:scale-90 2xl:scale-100 -translate-x-[110px] md:translate-x-0 sm:-translate-x-20">
+          <div className="w-[28rem] h-[23.5rem] bg-white backdrop-blur-md bg-opacity-20 rounded-3xl overflow-hidden p-3 font-poppins scale-[0.4] sm:scale-[0.5] md:scale-[0.7] lg:scale-[0.7] xl:scale-90 2xl:scale-100 xxs:-translate-x-[150px] -translate-x-[110px] md:translate-x-0 sm:-translate-x-28">
             <div className="overflow-hidden h-[14rem] rounded-2xl">
               <img onClick={() => scrollFxn(item.name)} alt="failed" src={item.image} className=" w-full object-cover h-[14rem] scale-[1.05]"/>
             </div>

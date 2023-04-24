@@ -55,9 +55,9 @@ function Cart() {
         <Navbar/>
         <div className='text-neutral-200 text-4xl font-medium mt-4 ml-4'> Cart</div>
         
-        <div className=' sm:mx-8 flex flex-col items-center sm:grid sm:grid-cols-3 sm:gap-7 pb-10'>
+        <div className=' sm:mx-8 flex flex-col items-center 2md:grid 2xl:grid-cols-3 2md:grid-cols-2 2md:gap-7 pb-10'>
           {cartArray && cartArray.map((items, index) => (
-            <div className='h-[13rem] sm:h-[15rem] bg-neutral-900 text-white mt-7 w-[90vw] sm:w-[29.5rem] rounded-3xl flex overflow-hidden shadow-[1px_1px_10px_0px] shadow-black' key={index}>
+            <div className='h-[13rem] sm:h-[15rem] bg-neutral-900 text-white mt-7 w-[90vw] xxs:w-[29.5rem] rounded-3xl flex overflow-hidden shadow-[1px_1px_10px_0px] shadow-black scale-100 2md:scale-[0.8] lg:scale-100 ' key={index}>
               <img alt='Not Found' src={items.img} className='w-[10rem] xxs:w-[12rem] sm:w-[14rem] h-[13rem] sm:h-[15rem] object-cover' />
               <div className='flex-1 px-3 p-2 mt-3'>
                 <div className='text-xl xxs:text-2xl text-theme font-[400] '>

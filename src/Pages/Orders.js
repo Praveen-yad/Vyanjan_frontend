@@ -32,9 +32,9 @@ const Orders = () => {
             {array.map((item, index) =>(
                 <div key={index}>
                     <div className='ml-3 -mb-2 xxs:mb-4'><GiFoodTruck size={50} className='text-theme' /></div>
-                    <div  className='w-[100%] flex flex-col items-center sm:grid sm:grid-cols-3 sm:gap-y-7 px-7'>
+                    <div  className='w-[100%] flex flex-col items-center 2md:grid 2xl:grid-cols-3 2md:grid-cols-2 2md:gap-y-7 px-7'>
                         {(item.items).map((data, indexes) => (
-                            <div className='-mb-10 xxs:mb-2 sm:mb-0 scale-[0.7] xxs:scale-[0.9] h-[15rem] bg-neutral-900 text-white w-[29.5rem] rounded-3xl flex overflow-hidden shadow-[1px_1px_10px_0px] shadow-black' key={indexes}>
+                            <div className='-mb-10 xxs:mb-2 sm:mb-0 scale-[0.7] xxs:scale-[0.9] md:scale-[0.8] translate-x-0 md:-translate-x-9 lg:translate-x-0 lg:scale-100 h-[15rem] bg-neutral-900 text-white w-[29.5rem] rounded-3xl flex overflow-hidden shadow-[1px_1px_10px_0px] shadow-black' key={indexes}>
                             <img alt='Not Found' src={data.img} className='w-[14rem] h-[15rem] object-cover' />
                             <div className='flex-1 px-3 p-2 mt-3'>
                             <div className='text-2xl text-theme font-[400] '>

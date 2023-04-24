@@ -12,7 +12,8 @@ module.exports = {
         "theme": "#f59e0b",
       },
       screens:{
-        "xxs": '450px'
+        "xxs": '450px',
+        "2md": '850px'
       },
     },
   },
