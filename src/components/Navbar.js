@@ -26,7 +26,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const apiCall = async() => {
-      const json = await axios.post('http://localhost:5000/api/getcart',{email:localStorage.getItem('email')})
+      const json = await axios.post('https://vyanjan-backend-ppeg0b564-praveen-yad.vercel.app/api/getcart',{email:localStorage.getItem('email')})
       const items = json.data.items
       setCount(items.length)
     }

@@ -11,7 +11,7 @@ function Footer() {
               <div className='text-sm ml-1 '>2022 Vyanjan, inc</div>
           </div>
           <div className='mr-5 text-theme text-sm flex items-center'>
-            <div>Jai Shri Ram</div>
+            <div className='text-lg'>🚩</div>
           </div>
         </div>
         

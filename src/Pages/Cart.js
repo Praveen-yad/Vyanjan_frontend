@@ -33,7 +33,7 @@ function Cart() {
   
   useEffect(() => {
     const apiCall = async() => {
-      const json = await axios.post('http://localhost:5000/api/getcart', {
+      const json = await axios.post('https://vyanjan-backend-ppeg0b564-praveen-yad.vercel.app/api/getcart', {
         email: localStorage.getItem('email')
       })
       setCartArray(json.data.items)
@@ -42,7 +42,7 @@ function Cart() {
   },[item])
 
   const RemoveHandler = async(id) => {
-    await axios.put('http://localhost:5000/api/decart',{
+    await axios.put('https://vyanjan-backend-ppeg0b564-praveen-yad.vercel.app/api/decart',{
         email: localStorage.getItem('email'),
         id: id
     })
@@ -55,21 +55,21 @@ function Cart() {
         <Navbar/>
         <div className='text-neutral-200 text-4xl font-medium mt-4 ml-4'> Cart</div>
         
-        <div className=' mx-8 grid grid-cols-3  gap-7 pb-10'>
+        <div className=' sm:mx-8 flex flex-col items-center sm:grid sm:grid-cols-3 sm:gap-7 pb-10'>
           {cartArray && cartArray.map((items, index) => (
-            <div className='h-[15rem] bg-neutral-900 text-white mt-7 w-[29.5rem] rounded-3xl flex overflow-hidden shadow-[1px_1px_10px_0px] shadow-black' key={index}>
-              <img alt='Not Found' src={items.img} className='w-[14rem] h-[15rem] object-cover' />
+            <div className='h-[13rem] sm:h-[15rem] bg-neutral-900 text-white mt-7 w-[90vw] sm:w-[29.5rem] rounded-3xl flex overflow-hidden shadow-[1px_1px_10px_0px] shadow-black' key={index}>
+              <img alt='Not Found' src={items.img} className='w-[10rem] xxs:w-[12rem] sm:w-[14rem] h-[13rem] sm:h-[15rem] object-cover' />
               <div className='flex-1 px-3 p-2 mt-3'>
-                <div className='text-2xl text-theme font-[400] '>
+                <div className='text-xl xxs:text-2xl text-theme font-[400] '>
                   {items.name}
                 </div>
                 <div className=' flex flex-col space-y-2'>
-                  <div className='text-white mb-2'>{items.CategoryName}</div>
+                  <div className='text-white mb-2 text-sm xxs:text-base'>{items.CategoryName}</div>
                   <div className='grid grid-cols-2 place-items-center scale-95 gap-x-4 gap-y-2.5 text-black'>
-                    <div className='bg-theme w-[7rem] text-center py-3 rounded-l-xl rounded-tr-xl'>Amount= {items.amount}</div>
-                    <div className='bg-theme w-[7rem] text-center py-3 rounded-tl-xl rounded-r-xl'>Size= {items.size}</div>
-                    <div className='bg-theme w-[7rem] text-center py-3 rounded-l-xl rounded-br-xl flex items-center justify-center'>Total=<BiRupee/>{(items.size === 'half')? items.options.half*items.amount : items.options.full*items.amount}</div>
-                    <motion.div whileTap={{scale:0.96}} className='bg-red-600 hover:outline hover:outline-1 w-[7rem] text-center py-3 rounded-r-xl rounded-bl-xl cursor-pointer text-white' onClick={() => RemoveHandler(items.id)}>Remove</motion.div>
+                    <div className='scale-[0.9] xxs:scale-[1] bg-theme text-sm xxs:text-base w-[5.5rem] xxs:w-[7rem] text-center py-3 rounded-l-xl rounded-tr-xl'>Amount= {items.amount}</div>
+                    <div className='scale-[0.9] xxs:scale-[1] bg-theme text-sm xxs:text-base w-[5.5rem] xxs:w-[7rem] text-center py-3 rounded-tl-xl rounded-r-xl'>Size= {items.size}</div>
+                    <div className='scale-[0.9] xxs:scale-[1] bg-theme text-sm xxs:text-base w-[5.5rem] xxs:w-[7rem] text-center py-3 rounded-l-xl rounded-br-xl flex items-center justify-center'>Total=<BiRupee/>{(items.size === 'half')? items.options.half*items.amount : items.options.full*items.amount}</div>
+                    <motion.div whileTap={{scale:0.96}} className='scale-[0.9] xxs:scale-[1] bg-red-600 hover:outline hover:outline-1 text-sm xxs:text-base w-[5.5rem] xxs:w-[7rem] text-center py-3 rounded-r-xl rounded-bl-xl cursor-pointer text-white' onClick={() => RemoveHandler(items.id)}>Remove</motion.div>
                   </div>
                 </div>
               </div>
@@ -84,8 +84,8 @@ function Cart() {
         }
 
         {placed && 
-          <div className='fixed top-0 flex justify-center items-center  w-[100vw] h-[100vh] z-20 backdrop-blur-3xl'>
-            <div className='bg-neutral-100 rounded-2xl w-[33rem] h-[24rem] py-2 px-2 flex flex-col'>
+          <div className='fixed top-0 flex justify-center items-center w-[100vw] h-[100vh] z-20 backdrop-blur-3xl'>
+            <div className='bg-neutral-100 rounded-2xl w-[22rem] xxs:w-[28rem] sm:w-[33rem] h-[24rem] py-2 px-2 flex flex-col'>
               <div className='z-10'><div className='ml-auto w-fit p-1 rounded-full hover:bg-black hover:bg-opacity-30 z-50' onClick={() => navigate('/')}><MdClose size={26}/></div></div>
               <div className=' h-[12.5rem]'>
                 <Player
