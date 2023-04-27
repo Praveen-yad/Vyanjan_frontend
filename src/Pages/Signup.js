@@ -15,7 +15,7 @@ function Signup() {
 
   const submitHandler = async(e) => {
     e.preventDefault();
-    const response = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/signup`,{
+    const response = await fetch(`https://vyanjan-backend.vercel.app/api/signup`,{
       method:"POST",
       headers:{
         "Content-Type":'application/json'
@@ -30,7 +30,7 @@ function Signup() {
     console.log(json)
     if(json.succes){
       navigate('/login')
-      axios.post(`${process.env.REACT_APP_API_ENDPOINT}/tocart`,{
+      axios.post(`https://vyanjan-backend.vercel.app/api/tocart`,{
           email:email
         }).catch((err) => {
           console.log(err)

@@ -17,7 +17,7 @@ function Card({data}){
     const email = localStorage.getItem('email')
 
     const AddToCart = async(id) => {
-        const json = await axios.put(`${process.env.REACT_APP_API_ENDPOINT}/upcart`,{
+        const json = await axios.put(`https://vyanjan-backend.vercel.app/api/upcart`,{
             email: email,
             id: id,
             amount:count,
@@ -38,7 +38,7 @@ function Card({data}){
 
     useEffect(() => {
         const apiCall = async() => {
-            const json = await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/getcart`,{email:localStorage.getItem('email')})
+            const json = await axios.post(`https://vyanjan-backend.vercel.app/api/getcart`,{email:localStorage.getItem('email')})
             let items = json.data.items
             let ied = data._id
             items.map((item) => item.id === ied && setToggle(false))
@@ -47,7 +47,7 @@ function Card({data}){
     },[])
 
     const RemoveHandler = async(id) => {
-        const json = await axios.put(`${process.env.REACT_APP_API_ENDPOINT}/decart`,{
+        const json = await axios.put(`https://vyanjan-backend.vercel.app/api/decart`,{
             email: email,
             id: id
         })

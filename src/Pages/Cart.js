@@ -24,7 +24,7 @@ function Cart() {
   
   useEffect(() => {
     const apiCall = async() => {
-      const json = await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/getcart`, {
+      const json = await axios.post(`https://vyanjan-backend.vercel.app/api/getcart`, {
         email: localStorage.getItem('email')
       })
       setCartArray(json.data.items)
@@ -33,7 +33,7 @@ function Cart() {
   },[item])
 
   const RemoveHandler = async(id) => {
-    await axios.put(`${process.env.REACT_APP_API_ENDPOINT}/decart`,{
+    await axios.put(`https://vyanjan-backend.vercel.app/api/decart`,{
         email: localStorage.getItem('email'),
         id: id
     })

@@ -9,7 +9,7 @@ function Category() {
     const [Mexican, setMexican] = useState([]);
     useEffect(() => {
       const apiCall = async () => {
-          const response = await axios.get(`${process.env.REACT_APP_API_ENDPOINT}/fooditems`);
+          const response = await axios.get(`https://vyanjan-backend.vercel.app/api/fooditems`);
           const data = response.data;
           setItalian(data.filter((item) => item.CategoryName === "Italian"))
           setIndian(data.filter((item) => item.CategoryName === "Indian"))

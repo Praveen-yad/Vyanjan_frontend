@@ -25,7 +25,7 @@ const Order = ({setToggle, cartArray, setPlaced}) => {
   const PlaceOrder = async(e) => {
     e.preventDefault();
 
-    await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/order`,{
+    await axios.post(`https://vyanjan-backend.vercel.app/api/order`,{
         email:localStorage.getItem('email'),
         items:cartArray,
         location:location,
@@ -38,7 +38,7 @@ const Order = ({setToggle, cartArray, setPlaced}) => {
         res.data.sucess === true && setPlaced(old => !old) 
     }).catch(err => console.log(err))
 
-    await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/emptycart`,{
+    await axios.post(`https://vyanjan-backend.vercel.app/api/emptycart`,{
         email:localStorage.getItem('email')
     })
 }
