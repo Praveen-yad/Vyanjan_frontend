@@ -10,7 +10,7 @@ const Orders = () => {
 
     useEffect(() => {
         const apiCall = async() => {
-            await axios.post('https://vyanjan-backend-ppeg0b564-praveen-yad.vercel.app/api/getorders',{
+            await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/getorders`,{
                 email: localStorage.getItem('email')
             }).then(res => {
                 setArray(res.data.json)

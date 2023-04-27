@@ -14,7 +14,7 @@ function Login() {
 
   const SubmitHandler = async(e) => {
     e.preventDefault();
-    const response = await fetch('https://vyanjan-backend-ppeg0b564-praveen-yad.vercel.app/api/login',{
+    const response = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/login`,{
       method:"POST",
       headers:{
         "Content-Type":'application/json'

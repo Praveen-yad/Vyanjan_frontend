@@ -15,7 +15,7 @@ function Signup() {
 
   const submitHandler = async(e) => {
     e.preventDefault();
-    const response = await fetch('https://vyanjan-backend-ppeg0b564-praveen-yad.vercel.app/api/signup',{
+    const response = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/signup`,{
       method:"POST",
       headers:{
         "Content-Type":'application/json'
@@ -30,7 +30,7 @@ function Signup() {
     console.log(json)
     if(json.succes){
       navigate('/login')
-      axios.post('https://vyanjan-backend-ppeg0b564-praveen-yad.vercel.app/api/tocart',{
+      axios.post(`${process.env.REACT_APP_API_ENDPOINT}/tocart`,{
           email:email
         }).catch((err) => {
           console.log(err)

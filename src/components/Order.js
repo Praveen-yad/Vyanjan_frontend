@@ -25,7 +25,7 @@ const Order = ({setToggle, cartArray, setPlaced}) => {
   const PlaceOrder = async(e) => {
     e.preventDefault();
 
-    await axios.post('https://vyanjan-backend-ppeg0b564-praveen-yad.vercel.app/api/order',{
+    await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/order`,{
         email:localStorage.getItem('email'),
         items:cartArray,
         location:location,
@@ -37,14 +37,15 @@ const Order = ({setToggle, cartArray, setPlaced}) => {
         res.data.sucess === true && setToggle(old => !old)
         res.data.sucess === true && setPlaced(old => !old) 
     }).catch(err => console.log(err))
-    await axios.post('https://vyanjan-backend-ppeg0b564-praveen-yad.vercel.app/api/emptycart',{
+
+    await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/emptycart`,{
         email:localStorage.getItem('email')
     })
 }
+console.log(Phone)
 
 const Locate = async() => {
     const loc = await axios.get(`http://api.weatherapi.com/v1/current.json?key=74c9800c7cde4a968d1124325232704&q=${latitude},${longitude}&aqi=yes`)
-    
     setLocation(loc.data.location.name + ' , ' + loc.data.location.region)
 }
 

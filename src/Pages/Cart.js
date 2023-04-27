@@ -24,7 +24,7 @@ function Cart() {
   
   useEffect(() => {
     const apiCall = async() => {
-      const json = await axios.post('https://vyanjan-backend-ppeg0b564-praveen-yad.vercel.app/api/getcart', {
+      const json = await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/getcart`, {
         email: localStorage.getItem('email')
       })
       setCartArray(json.data.items)
@@ -33,7 +33,7 @@ function Cart() {
   },[item])
 
   const RemoveHandler = async(id) => {
-    await axios.put('https://vyanjan-backend-ppeg0b564-praveen-yad.vercel.app/api/decart',{
+    await axios.put(`${process.env.REACT_APP_API_ENDPOINT}/decart`,{
         email: localStorage.getItem('email'),
         id: id
     })
