@@ -85,7 +85,7 @@ function Card({data}){
                 {toggle ? (token) ? 
                     <motion.div whileTap={{scale:0.97}} className='bg-theme px-2 py-1 rounded-md text-center hover:outline outline-[1.5px] cursor-pointer' onClick={() => AddToCart(data._id)} ><AiOutlineShoppingCart size={22} className='w-[2.69rem]'/></motion.div> 
                 :
-                    <div className=' bg-theme px-2 py-1 rounded-md text-center hover:outline hover:opacity-75 outline-[1.5px] cursor-not-allowed select-none'>To Cart</div>
+                    <div className=' bg-theme px-2 py-1 rounded-md text-center hover:outline hover:opacity-75 outline-[1.5px] cursor-not-allowed select-none'><AiOutlineShoppingCart size={22} className='w-[2.69rem]'/></div>
                 :
                 <motion.div whileTap={{scale:0.96}} className='bg-theme px-2 py-1 rounded-md text-center hover:outline outline-[1.5px] cursor-pointer' onClick={() => RemoveHandler(data._id)} >Remove</motion.div>
 
