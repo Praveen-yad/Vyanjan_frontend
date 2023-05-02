@@ -7,6 +7,7 @@ import { add, remove } from '../store/cardSlice'
 import { useDispatch } from 'react-redux'
 import { motion } from 'framer-motion'
 import {AiOutlineShoppingCart} from 'react-icons/ai'
+import Url from '../Url'
 
 function Card({data}){
     const dispatch = useDispatch()
@@ -17,7 +18,7 @@ function Card({data}){
     const email = localStorage.getItem('email')
 
     const AddToCart = async(id) => {
-        const json = await axios.put(`https://vyanjan-backend.vercel.app/api/upcart`,{
+        await axios.put(`${Url}/upcart`,{
             email: email,
             id: id,
             amount:count,
@@ -31,27 +32,25 @@ function Card({data}){
             },
             img:data.img
         })
-        // console.log(json)
         setToggle(false)
         dispatch(add())
     }
 
     useEffect(() => {
         const apiCall = async() => {
-            const json = await axios.post(`https://vyanjan-backend.vercel.app/api/getcart`,{email:localStorage.getItem('email')})
+            const json = await axios.post(`${Url}/getcart`,{email:localStorage.getItem('email')})
             let items = json.data.items
             let ied = data._id
-            items.map((item) => item.id === ied && setToggle(false))
+            items && items.map((item) => item.id === ied && setToggle(false))
         }
         apiCall()
-    },[])
+    },[data._id])
 
     const RemoveHandler = async(id) => {
-        const json = await axios.put(`https://vyanjan-backend.vercel.app/api/decart`,{
+        await axios.put(`${Url}/decart`,{
             email: email,
             id: id
         })
-        // console.log(json)
         setToggle(true)
         dispatch(remove())
     }

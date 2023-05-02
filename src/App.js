@@ -1,20 +1,21 @@
 import { BrowserRouter, Route,Routes } from "react-router-dom";
-import { Home, Login, Signup, Cart, Orders } from "./Pages";
-import { Provider } from "react-redux";
-import store from "./store/store";
+import { Home, Login, Signup, Cart, Orders, Business,InvalidePage } from "./Pages";
+
+
 function App() {
+
   return (
-    <Provider store={store}>
       <BrowserRouter>
         <Routes>
+          <Route element={<InvalidePage/>} path="*" />
           <Route element={<Home/>} path='/' />
           <Route element={<Login/>} path='/login' />
           <Route element={<Signup/>} path='/signup' />
-          <Route element={<Cart/>} path="/cart"/>
+          <Route element={<Cart/>} path='/cart' /> 
           <Route element={<Orders/>} path='/orders' /> 
+          <Route element={<Business/>} path="/business" />
         </Routes>
       </BrowserRouter>
-    </Provider>
   );
 }
 

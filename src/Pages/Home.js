@@ -7,7 +7,7 @@ import Category from '../components/Category'
 function Home() {
   
   return (
-    <div className='bg-neutral-900 text-white'>
+    <div className='min-h-screen bg-neutral-900 text-white'>
         <Navbar/>
         <div className=' mt-8'>
           <div className='mx-3 sm:mx-5 bg-[radial-gradient(ellipse_at_right,_var(--tw-gradient-stops))] from-red-800 to-amber-600 mb-20 mt-4 rounded-[2.5rem] h-[14.5rem] sm:h-[19rem] md:h-[23rem] lg:h-[25rem] xl:h-[30rem] 2xl:h-[32rem] relative shadow-[0px_4px_8px_0px] shadow-black flex flex-col items-center'>

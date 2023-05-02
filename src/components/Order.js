@@ -5,8 +5,9 @@ import { motion } from 'framer-motion'
 import { CiSaveUp1 } from 'react-icons/ci'
 import axios from 'axios'
 import { BiCurrentLocation } from 'react-icons/bi'
+import Url from '../Url'
 
-const Order = ({setToggle, cartArray, setPlaced}) => {
+const Order = ({setToggle, cartArray, setPlaced, total}) => {
     const [ tip , setTip ] = useState(0)
     const [cash, setcash] = useState(true)
     const [location, setLocation] = useState('')
@@ -18,38 +19,41 @@ const Order = ({setToggle, cartArray, setPlaced}) => {
       navigator.geolocation.getCurrentPosition((position) => {
       setLatitude(position.coords.latitude)
       setLongitude(position.coords.longitude)
-    })
+
+})
 },[])
 
 
-  const PlaceOrder = async(e) => {
+const PlaceOrder = async(e) => {
     e.preventDefault();
-
-    await axios.post(`https://vyanjan-backend.vercel.app/api/order`,{
+    
+    await axios.post(`${Url}/order`,{
+        name:localStorage.getItem('name'),
         email:localStorage.getItem('email'),
         items:cartArray,
         location:location,
         tip:tip,
         payment:'cash',
         status:'Order Places',
-        phone:Phone
+        phone:Phone,
+        total:total
     }).then(res => {
         res.data.sucess === true && setToggle(old => !old)
         res.data.sucess === true && setPlaced(old => !old) 
     }).catch(err => console.log(err))
 
-    await axios.post(`https://vyanjan-backend.vercel.app/api/emptycart`,{
+    await axios.post(`${Url}/emptycart`,{
         email:localStorage.getItem('email')
     })
+    
 }
-console.log(Phone)
 
 const Locate = async() => {
-    const loc = await axios.get(`http://api.weatherapi.com/v1/current.json?key=74c9800c7cde4a968d1124325232704&q=${latitude},${longitude}&aqi=yes`)
+    let loc = await axios.get(`http://api.weatherapi.com/v1/current.json?key=74c9800c7cde4a968d1124325232704&q=${latitude},${longitude}&aqi=yes`)
     setLocation(loc.data.location.name + ' , ' + loc.data.location.region)
 }
 
-  return (
+return (
     <div className='bg-white rounded-2xl w-[22rem] xxs:w-[28rem] sm:w-[33rem] h-[26.5rem] xxs:h-[28.5rem] py-2 px-2'>
         <form onSubmit={PlaceOrder}>
             <div className='bg-black ml-auto w-fit p-1 rounded-full bg-opacity-0 hover:bg-opacity-30' onClick={() => setToggle(old => !old)}><MdClose  size={26}/></div>
@@ -85,7 +89,7 @@ const Locate = async() => {
                         {[0, 30, 60].map((item, index) => (
                             <motion.div onClick={() => setTip(item)} className={` w-[65px] xxs:w-[90px] sm:w-24 h-16 xxs:h-20 bg-neutral-900 flex justify-center items-center rounded-lg ${tip === item && 'outline outline-theme xxs:outline-4'}`} whileTap={{scale:0.97}} key={index}><FcMoneyTransfer/>{item}</motion.div>
                         ))}
-                        <motion.button className=' w-[65px] xxs:w-[90px] sm:w-24 h-16 xxs:h-20 bg-theme flex justify-center items-center rounded-lg cursor-pointer' whileTap={{scale:0.97}} ><CiSaveUp1 className='text-3xl rotate-90'/></motion.button>
+                        <motion.button className=' w-[65px] xxs:w-[90px] sm:w-24 h-16 xxs:h-20 bg-theme flex flex-col justify-center items-center rounded-lg cursor-pointer' whileTap={{scale:0.97}} ><CiSaveUp1 className='text-[27px] mb-1 rotate-90'/>Rs. {total}</motion.button>
                     </div>
                 </div>
             </div>

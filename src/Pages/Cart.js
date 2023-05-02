@@ -11,6 +11,7 @@ import { Player, Controls } from '@lottiefiles/react-lottie-player';
 import { MdClose } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import Footer from '../components/Footer'
+import Url from '../Url'
 
 
 function Cart() {
@@ -20,11 +21,13 @@ function Cart() {
   const [cartArray, setCartArray] = useState()
   const [ toggle, setToggle ] = useState(true)
   const [placed, setPlaced ] = useState(false)
+  const [total, setTotal ] = useState(0)
+
 
   
   useEffect(() => {
     const apiCall = async() => {
-      const json = await axios.post(`https://vyanjan-backend.vercel.app/api/getcart`, {
+      const json = await axios.post(`${Url}/getcart`, {
         email: localStorage.getItem('email')
       })
       setCartArray(json.data.items)
@@ -33,12 +36,19 @@ function Cart() {
   },[item])
 
   const RemoveHandler = async(id) => {
-    await axios.put(`https://vyanjan-backend.vercel.app/api/decart`,{
+    await axios.put(`${Url}/decart`,{
         email: localStorage.getItem('email'),
         id: id
     })
     dispatch(remove())
 }
+
+ const toggleHandler = () => {
+  setTotal(0)
+  setToggle(!toggle)
+  cartArray.map((item) => item.size === 'half' ? setTotal(old => old + item.options.half*item.amount) : setTotal(old => old + item.options.full*item.amount) )
+
+ }
 
   return (
     <div className='bg-neutral-900 font-poppins min-h-[110vh] flex flex-col justify-between'>
@@ -67,10 +77,10 @@ function Cart() {
             </div>
             ))}
         </div>
-        <div className='px-9'><motion.div whileTap={{scale:0.97}} className='bg-theme w-fit ml-auto px-4 py-2 rounded-lg cursor-pointer' onClick={() => setToggle(!toggle)}>Place Order</motion.div></div>
+        <div className='px-9'><motion.div whileTap={{scale:0.97}} className='bg-theme w-fit ml-auto px-4 py-2 rounded-lg cursor-pointer' onClick={toggleHandler}>Place Order</motion.div></div>
         {toggle ? <div></div> :
           <div className='fixed top-0 flex justify-center items-center  w-[100vw] h-[100vh] z-20 backdrop-blur-3xl'>
-            <Order setPlaced={setPlaced} cartArray={cartArray} setToggle={setToggle} toggle={toggle} />
+            <Order setPlaced={setPlaced} cartArray={cartArray} total={total} setToggle={setToggle} toggle={toggle} />
           </div>
         }
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import SubCategory from "./SubCategory";
+import Url from "../Url";
 
 function Category() {
 
@@ -9,7 +10,7 @@ function Category() {
     const [Mexican, setMexican] = useState([]);
     useEffect(() => {
       const apiCall = async () => {
-          const response = await axios.get(`https://vyanjan-backend.vercel.app/api/fooditems`);
+          const response = await axios.get(`${Url}/fooditems`);
           const data = response.data;
           setItalian(data.filter((item) => item.CategoryName === "Italian"))
           setIndian(data.filter((item) => item.CategoryName === "Indian"))

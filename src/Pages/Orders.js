@@ -4,13 +4,14 @@ import axios from 'axios'
 import { BiRupee } from 'react-icons/bi'
 import { GiFoodTruck } from 'react-icons/gi'
 import Footer from '../components/Footer'
+import Url from '../Url'
 
 const Orders = () => {
     const [ array, setArray ] = useState([])
 
     useEffect(() => {
         const apiCall = async() => {
-            await axios.post(`https://vyanjan-backend.vercel.app/api/getorders`,{
+            await axios.post(`${Url}/getorders`,{
                 email: localStorage.getItem('email')
             }).then(res => {
                 setArray(res.data.json)
@@ -45,7 +46,7 @@ const Orders = () => {
                                 <div className='grid grid-cols-2 place-items-center scale-95 gap-x-4 gap-y-2.5 text-black'>
                                 <div className='bg-theme w-[7rem] text-center py-3 rounded-l-xl rounded-tr-xl'>Amount= {data.amount}</div>
                                 <div className='bg-theme w-[7rem] text-center py-3 rounded-tl-xl rounded-r-xl'>Size= {data.size}</div>
-                                <div className='bg-theme w-[7rem] text-center py-3 rounded-l-xl rounded-br-xl flex items-center justify-center'>Total=<BiRupee/>{(data.size === 'half')? data.options.half*data.amount+item.tip : data.options.full*data.amount+item.tip}</div>
+                                <div className='bg-theme w-[7rem] text-center py-3 rounded-l-xl rounded-br-xl flex items-center justify-center'>Total=<BiRupee/>{(data.size === 'half')? data.options.half*data.amount : data.options.full*data.amount}</div>
                                 <div className='bg-green-500 w-[7rem] text-center py-3 rounded-r-xl rounded-bl-xl flex items-center justify-center'>{item.status}</div>
                                 </div>
                             </div>

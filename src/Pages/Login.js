@@ -5,6 +5,7 @@ import { RxCross2 } from 'react-icons/rx'
 import Cookies from 'js-cookie'
 import { GiDualityMask } from 'react-icons/gi'
 import { motion } from 'framer-motion'
+import Url from '../Url'
 
 function Login() {
   const navigate = useNavigate()
@@ -14,7 +15,7 @@ function Login() {
 
   const SubmitHandler = async(e) => {
     e.preventDefault();
-    const response = await fetch(`https://vyanjan-backend.vercel.app/api/login`,{
+    const response = await fetch(`${Url}/login`,{
       method:"POST",
       headers:{
         "Content-Type":'application/json'
@@ -25,12 +26,17 @@ function Login() {
       })
     });
     const data = await response.json();
-    console.log(data)
     Cookies.set('token',data.token)
 
     if(data.sucess){
-      navigate('/')
+      if(data.info.business){
+        navigate('/business')
+      }else{
+        navigate('/')
+      }
+
       localStorage.setItem('email',data.info.email)
+      localStorage.setItem('name',data.info.name)
     }
   }
 

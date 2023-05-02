@@ -8,6 +8,7 @@ import { motion } from 'framer-motion'
 import { useLocation } from 'react-router-dom'
 import { FiMenu } from 'react-icons/fi'
 import { RxCross2 } from 'react-icons/rx'
+import Url from '../Url'
 
 const Navbar = () => {
   const location = useLocation();
@@ -37,9 +38,9 @@ const Navbar = () => {
 
   useEffect(() => {
     const apiCall = async() => {
-      const json = await axios.post(`https://vyanjan-backend.vercel.app/api/getcart`,{email:localStorage.getItem('email')})
+      const json = await axios.post(`${Url}/getcart`,{email:localStorage.getItem('email')})
       const items = json.data.items
-      setCount(items.length)
+      items && setCount(items.length)
     }
     apiCall()
   },[item])
@@ -48,8 +49,11 @@ const Navbar = () => {
     await Cookies.remove('token')
     setToken('')
     localStorage.removeItem('email')
+    localStorage.removeItem('name')
+    localStorage.removeItem('buss')
     window.scrollTo(0,0)
     navigate('/')
+    // window.location.reload()
   }
 
   if(location.pathname === '/cart'){
@@ -65,7 +69,7 @@ const Navbar = () => {
       <div className='flex space-x-8 items-center relative'>
         <img alt='' src='https://res.cloudinary.com/de2rges3m/image/upload/v1681306027/vyanjan-removebg-preview_ocfns3.png' className='w-52 -translate-x-4' onClick={() => navigate('/')} />
         {(location.pathname !== '/') && <div className='text-neutral-300 pt-1 cursor-pointer -translate-x-8 hidden sm:flex' onClick={() => navigate('/')}>Home</div>}
-        {(location.pathname !== '/orders') && <div className='text-neutral-300 pt-1 cursor-pointer -translate-x-8 hidden sm:flex' onClick={() => navigate('/orders')}>Orders</div>}
+        {(location.pathname !== '/orders') && token && <div className='text-neutral-300 pt-1 cursor-pointer -translate-x-8 hidden sm:flex' onClick={() => navigate('/orders')}>Orders</div>}
       </div>
       {(token)? 
       <div className='space-x-3 font-poppins hidden sm:flex'>

@@ -4,6 +4,9 @@ import { RxCross2 } from 'react-icons/rx'
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
+import Url from "../Url";
+import Cookies from 'js-cookie'
+
 
 
 function Signup() {
@@ -12,10 +15,12 @@ function Signup() {
   const [name, setName ] = useState('')
   const [email, setEmail ] = useState('')
   const [password, setPassword ] = useState('')
+  const [Business, setBusiness ] = useState(false)
+
 
   const submitHandler = async(e) => {
     e.preventDefault();
-    const response = await fetch(`https://vyanjan-backend.vercel.app/api/signup`,{
+    const response = await fetch(`${Url}/signup`,{
       method:"POST",
       headers:{
         "Content-Type":'application/json'
@@ -23,14 +28,37 @@ function Signup() {
       body:JSON.stringify({
         name:name,
         email:email,
-        password:password
+        password:password,
+        business: Business
       })
     });
     const json = await response.json();
     console.log(json)
     if(json.succes){
-      navigate('/login')
-      axios.post(`https://vyanjan-backend.vercel.app/api/tocart`,{
+      const response = await fetch(`${Url}/login`,{
+        method:"POST",
+        headers:{
+          "Content-Type":'application/json'
+        },
+        body:JSON.stringify({
+          email:email,
+          password:password
+        })
+      });
+      const data = await response.json();
+      Cookies.set('token',data.token)
+  
+      if(data.sucess){
+        if(data.info.business){
+          navigate('/business')
+        }else{
+          navigate('/')
+        }
+        localStorage.setItem('email',data.info.email)
+        localStorage.setItem('name',data.info.name)
+      }
+
+      await axios.post(`${Url}/tocart`,{
           email:email
         }).catch((err) => {
           console.log(err)
@@ -53,7 +81,7 @@ function Signup() {
         </div>
         <form className="flex flex-col text-white w-[21rem] lg:w-[24rem] xl:w-[25rem] space-y-4" onSubmit={submitHandler}>
         <div className="relative bg-theme rounded-full flex justify-center"> 
-            <input required className="group py-2 px-3 text-center bg-neutral-800 rounded-full w-full outline-none focus:w-[20rem]  lg:focus:w-[23rem] xl:focus:w-[24rem] transition-all duration-300 scale-x-[1.015]" placeholder="Username" type='text' value={name} onChange={(e)=>setName(e.target.value)} />
+            <input required className="group py-2 px-3 text-center bg-neutral-800 rounded-full w-full outline-none focus:w-[20rem]  lg:focus:w-[23rem] xl:focus:w-[24rem] transition-all duration-300 scale-x-[1.015]" placeholder="Name" type='text' value={name} onChange={(e)=>setName(e.target.value)} />
 
           </div>
           <div className="relative bg-theme rounded-full flex justify-center"> 
@@ -64,10 +92,18 @@ function Signup() {
             <input required className="group py-2 px-3 bg-neutral-800 rounded-full w-full outline-none focus:w-[20rem] lg:focus:w-[23rem] xl:focus:w-[24rem] duration-300 text-center transition-all scale-x-[1.015]" placeholder="Password" type='password' value={password} onChange={(e)=>setPassword(e.target.value)} />
           </div>
           <div className="flex justify-between">
-            <div className="text-[12px]">Already signed it{' '}
-            <Link to={'/login'}>
-             <span className="text-theme underline cursor-pointer">Login</span>
-            </Link>
+            <div>
+              <div onClick={() => setBusiness(!Business)} className=" flex bg-neutral-800 rounded-full mb-2 cursor-pointer py-1 px-1">
+                <div className={`w-6 h-6 rounded-full flex items-center transition-all duration-300 justify-center z-20 ${Business ? 'translate-x-[103px] bg-theme':'bg-white'}`}>
+                </div>
+                <div className="ml-1 text-white select-none">{Business ? 'Business' : 'Standard'}</div>
+              </div>
+
+              <div className="text-[12px]">Already signed it{' '}
+              <Link to={'/login'}>
+                <span className="text-theme underline cursor-pointer">Login</span>
+              </Link>
+              </div>
             </div>
             <motion.div whileTap={{scale:0.97}}><button className="bg-theme px-4 py-2 rounded-full cursor-pointer hover:outline outline-[2px]">Proceed</button></motion.div>
           </div>

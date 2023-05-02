@@ -23,7 +23,7 @@ function SubCategory({name, data}) {
             <div className="hover:bg-white hover:bg-opacity-10 transition-all ease-in-out duration-300 p-2 rounded-full ml-2 hidden sm:flex" onClick={sliderLeft}>
                 <MdNavigateBefore className="text-white text-2xl " />
             </div>
-            <div className="flex space-x-[1.65rem] overflow-x-scroll scrollbar-hide scroll-smooth -mt-4 xxs:mt-0 py-4 pl-5 xxs:pl-7" id={`slider${name}`} >
+            <div className="flex space-x-[1.65rem] overflow-x-scroll scrollbar-hide scroll-smooth -mt-4 xxs:mt-0 py-4 pl-5 xxs:pl-7 2xl:pl-3" id={`slider${name}`} >
                 {data.map((item) => (
                 <Card
                     data={item}
