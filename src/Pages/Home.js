@@ -5,7 +5,7 @@ import Slider from '../components/Slider'
 import Category from '../components/Category'
 
 function Home() {
-  
+
   return (
     <div className='min-h-screen bg-neutral-900 text-white'>
         <Navbar/>

@@ -58,7 +58,7 @@ return (
         <form onSubmit={PlaceOrder}>
             <div className='bg-black ml-auto w-fit p-1 rounded-full bg-opacity-0 hover:bg-opacity-30' onClick={() => setToggle(old => !old)}><MdClose  size={26}/></div>
             <div className='px-5 -mt-1'>
-                <div>Location</div>
+                <div>Location <spna className="text-xs"> (Only Available in Lucknow)</spna></div>
                 <div className='mt-2 flex items-center bg-transparent outline outline-1 px-2 py-1 rounded-md'>
                     <input required placeholder='Location' value={location} onChange={(e) => setLocation(e.target.value)} className='w-full bg-transparent outline-none'/>
                     <BiCurrentLocation onClick={Locate} className='text-xl hover:text-theme'/>

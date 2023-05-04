@@ -69,12 +69,12 @@ const Navbar = () => {
       <div className='flex space-x-8 items-center relative'>
         <img alt='' src='https://res.cloudinary.com/de2rges3m/image/upload/v1681306027/vyanjan-removebg-preview_ocfns3.png' className='w-52 -translate-x-4' onClick={() => navigate('/')} />
         {(location.pathname !== '/') && <div className='text-neutral-300 pt-1 cursor-pointer -translate-x-8 hidden sm:flex' onClick={() => navigate('/')}>Home</div>}
-        {(location.pathname !== '/orders') && token && <div className='text-neutral-300 pt-1 cursor-pointer -translate-x-8 hidden sm:flex' onClick={() => navigate('/orders')}>Orders</div>}
+        {(location.pathname !== '/orders') && token && <div className={`text-neutral-300 pt-1 cursor-pointer -translate-x-8 hidden sm:flex `} onClick={() => navigate('/orders')}>Orders</div>}
       </div>
       {(token)? 
       <div className='space-x-3 font-poppins hidden sm:flex'>
         {location.pathname !== '/cart' && 
-          <motion.div whileTap={{scale:0.97}} className='bg-theme text-black px-4 py-1 rounded-md cursor-pointer relative' onClick={Navigation} >Cart
+          <motion.div whileTap={{scale:0.97}} className={`bg-theme text-black px-4 py-1 rounded-md cursor-pointer relative `} onClick={Navigation} >Cart
           {(count === 0) ?
             <span></span>
           :

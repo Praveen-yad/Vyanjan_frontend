@@ -29,9 +29,11 @@ function Login() {
     Cookies.set('token',data.token)
 
     if(data.sucess){
-      if(data.info.business){
-        navigate('/business')
+      if(data.info.business === true){
+        localStorage.setItem('buss', true)
+        navigate('/')
       }else{
+        localStorage.setItem('buss', false)
         navigate('/')
       }
 
@@ -61,7 +63,7 @@ function Login() {
           </div>
           <div className="relative bg-theme rounded-full  flex justify-center "> 
             <input required className="group py-2 px-3 bg-neutral-800 rounded-full w-full outline-none focus:w-[20rem]  lg:focus:w-[23rem] xl:focus:w-[24rem] duration-300 text-center transition-all scale-x-[1.015]" placeholder="Password" type={`${!toggle? 'password': 'text'}`} onChange={(e) => setPassword(e.target.value)} />
-            <span className={`absolute right-3 bottom-0 top-2.5`} onClick={() => setToggle(!toggle)}><GiDualityMask className={`-mt-0.5 ${toggle && 'text-red-500' } cursor-pointer transition-colors duration-200`} size={23}/></span>
+            <span className={`absolute right-3 bottom-0 top-2.5`} onClick={() => setToggle(!toggle)}><div className={`-mt-0.5 ${toggle && 'text-red-500' } cursor-pointer transition-colors duration-200`} >👁️</div></span>
           </div>
           <div className="flex justify-between">
             <div className="text-[12px]">Don't have an account?{' '}

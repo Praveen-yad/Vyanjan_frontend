@@ -82,7 +82,8 @@ function Card({data}){
                     <span id='total' className='select-none'>{(size === 'half')? data.options.half*count : data.options.full*count }</span>
                 </div>
                 {toggle ? (token) ? 
-                    <motion.div whileTap={{scale:0.97}} className='bg-theme px-2 py-1 rounded-md text-center hover:outline outline-[1.5px] cursor-pointer' onClick={() => AddToCart(data._id)} ><AiOutlineShoppingCart size={22} className='w-[2.69rem]'/></motion.div> 
+                    <motion.div whileTap={{scale:0.97}} className='bg-theme px-2 py-1 rounded-md text-center hover:outline outline-[1.5px] cursor-pointer'
+                    onClick={() => AddToCart(data._id) } ><AiOutlineShoppingCart size={22} className='w-[2.69rem]'/></motion.div>
                 :
                     <div className=' bg-theme px-2 py-1 rounded-md text-center hover:outline hover:opacity-75 outline-[1.5px] cursor-not-allowed select-none'><AiOutlineShoppingCart size={22} className='w-[2.69rem]'/></div>
                 :

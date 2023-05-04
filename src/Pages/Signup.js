@@ -15,8 +15,6 @@ function Signup() {
   const [name, setName ] = useState('')
   const [email, setEmail ] = useState('')
   const [password, setPassword ] = useState('')
-  const [Business, setBusiness ] = useState(false)
-
 
   const submitHandler = async(e) => {
     e.preventDefault();
@@ -29,7 +27,6 @@ function Signup() {
         name:name,
         email:email,
         password:password,
-        business: Business
       })
     });
     const json = await response.json();
@@ -49,13 +46,9 @@ function Signup() {
       Cookies.set('token',data.token)
   
       if(data.sucess){
-        if(data.info.business){
-          navigate('/business')
-        }else{
-          navigate('/')
-        }
         localStorage.setItem('email',data.info.email)
         localStorage.setItem('name',data.info.name)
+        navigate('/')
       }
 
       await axios.post(`${Url}/tocart`,{
@@ -93,12 +86,6 @@ function Signup() {
           </div>
           <div className="flex justify-between">
             <div>
-              <div onClick={() => setBusiness(!Business)} className=" flex bg-neutral-800 rounded-full mb-2 cursor-pointer py-1 px-1">
-                <div className={`w-6 h-6 rounded-full flex items-center transition-all duration-300 justify-center z-20 ${Business ? 'translate-x-[103px] bg-theme':'bg-white'}`}>
-                </div>
-                <div className="ml-1 text-white select-none">{Business ? 'Business' : 'Standard'}</div>
-              </div>
-
               <div className="text-[12px]">Already signed it{' '}
               <Link to={'/login'}>
                 <span className="text-theme underline cursor-pointer">Login</span>

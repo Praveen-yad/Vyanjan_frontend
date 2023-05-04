@@ -9,14 +9,14 @@ import Url from '../Url'
 const Business = () => {
     const [ array, setArray ] = useState([])
 
+
     useEffect(() => {
         const apiCall = async() => {
             const response = await axios.post(`${Url}/allOrders`)
             setArray(response.data.json)
         }
         apiCall();
-
-
+          
     }, [])
 
   return (
