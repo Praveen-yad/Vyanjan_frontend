@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { HiMinus, HiPlus } from 'react-icons/hi'
 import { BiRupee } from 'react-icons/bi'
-import Cookies from 'js-cookie'
 import axios from 'axios'
 import { add, remove } from '../store/cardSlice'
 import { useDispatch } from 'react-redux'
@@ -14,7 +13,7 @@ function Card({data}){
     const [size, setSize] = useState('half')
     const [count, setcount] = useState(1)
     const [toggle , setToggle ] = useState(true)
-    const [token] = useState(Cookies.get('token'))
+    const [token] = useState(localStorage.getItem('token'))
     const email = localStorage.getItem('email')
 
     const AddToCart = async(id) => {

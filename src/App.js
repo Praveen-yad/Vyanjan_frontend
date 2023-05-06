@@ -1,5 +1,5 @@
 import { BrowserRouter, Route,Routes } from "react-router-dom";
-import { Home, Login, Signup, Cart, Orders, Business, InvalidePage } from "./Pages";
+import { Home, Login, Signup, Cart, Orders, InvalidePage } from "./Pages";
 
 function App() {
 
@@ -12,7 +12,6 @@ function App() {
           <Route element={<Signup/>} path='/signup' />
           <Route element={<Cart/>} path='/cart' /> 
           <Route element={<Orders/>} path='/orders' /> 
-          <Route element={<Business/>} path="/business" />
         </Routes>
       </BrowserRouter>
   );

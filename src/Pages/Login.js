@@ -1,17 +1,14 @@
 import React,{ useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { RxCross2 } from 'react-icons/rx'
-import Cookies from 'js-cookie'
-import { GiDualityMask } from 'react-icons/gi'
 import { motion } from 'framer-motion'
 import Url from '../Url'
 
 function Login() {
-  const navigate = useNavigate()
   const [ email, setEmail ] = useState('')
   const [ password, setPassword ] = useState('')
   const [toggle, setToggle] = useState(false)
+  const navigate = useNavigate()
 
   const SubmitHandler = async(e) => {
     e.preventDefault();
@@ -26,19 +23,12 @@ function Login() {
       })
     });
     const data = await response.json();
-    Cookies.set('token',data.token)
 
     if(data.sucess){
-      if(data.info.business === true){
-        localStorage.setItem('buss', true)
-        navigate('/')
-      }else{
-        localStorage.setItem('buss', false)
-        navigate('/')
-      }
-
+      localStorage.setItem('token',data.token)
       localStorage.setItem('email',data.info.email)
       localStorage.setItem('name',data.info.name)
+      navigate('/')
     }
   }
 

@@ -56,7 +56,7 @@ function Slider() {
       >
         {a.map((item, index) => (
         <SwiperSlide key={index} className="">
-          <div className="w-[28rem] h-[23.5rem] bg-white backdrop-blur-md bg-opacity-20 rounded-3xl overflow-hidden p-3 font-poppins scale-[0.4] sm:scale-[0.5] md:scale-[0.7] lg:scale-[0.7] xl:scale-90 2xl:scale-100 xxs:-translate-x-[150px] -translate-x-[110px] md:translate-x-0 sm:-translate-x-28">
+          <div className={`w-[28rem] h-[23.5rem] bg-white backdrop-blur-md bg-opacity-20 rounded-3xl overflow-hidden p-3 font-poppins scale-[0.4] sm:scale-[0.5] md:scale-[0.7] lg:scale-[0.7] xl:scale-90 2xl:scale-100 xxs:-translate-x-[150px] -translate-x-[110px] md:translate-x-0 sm:-translate-x-28 ${index !== 1 && 'translate-y-1.5 sm:translate-y-0'}`}>
             <div className="overflow-hidden h-[14rem] rounded-2xl">
               <img onClick={() => scrollFxn(item.name)} alt="failed" src={item.image} className=" w-full object-cover h-[14rem] scale-[1.05]"/>
             </div>

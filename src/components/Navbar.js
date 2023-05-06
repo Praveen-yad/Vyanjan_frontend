@@ -1,6 +1,5 @@
 import React,{ useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
-import Cookies from 'js-cookie'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
@@ -33,7 +32,7 @@ const Navbar = () => {
   }
 
   useEffect(() => {
-    setToken(Cookies.get('token'))
+    setToken(localStorage.getItem('token'))
   },[token])
 
   useEffect(() => {
@@ -46,11 +45,11 @@ const Navbar = () => {
   },[item])
   
   const LogoutHandler = async() => {
-    await Cookies.remove('token')
+    await localStorage.removeItem('token')
     setToken('')
     localStorage.removeItem('email')
     localStorage.removeItem('name')
-    localStorage.removeItem('buss')
+    localStorage.removeItem('token')
     window.scrollTo(0,0)
     navigate('/')
     // window.location.reload()

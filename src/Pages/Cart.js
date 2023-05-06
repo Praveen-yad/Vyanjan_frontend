@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import { remove } from '../store/cardSlice'
 import { useSelector } from 'react-redux'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { BiRupee } from 'react-icons/bi'
 import Order from '../components/Order'
 import { Player, Controls } from '@lottiefiles/react-lottie-player';
@@ -23,7 +23,16 @@ function Cart() {
   const [placed, setPlaced ] = useState(false)
   const [total, setTotal ] = useState(0)
 
-
+  const animate = {
+    hidden:{
+      scale:0,
+      y:-200
+    },
+    visible:{
+      scale:1,
+      y:0
+    }
+  }
   
   useEffect(() => {
     const apiCall = async() => {
@@ -39,22 +48,25 @@ function Cart() {
     await axios.put(`${Url}/decart`,{
         email: localStorage.getItem('email'),
         id: id
-    })
-    dispatch(remove())
-}
-
- const toggleHandler = () => {
-  setTotal(0)
-  setToggle(!toggle)
-  cartArray.map((item) => item.size === 'half' ? setTotal(old => old + item.options.half*item.amount) : setTotal(old => old + item.options.full*item.amount) )
-
- }
-
-  return (
-    <div className='bg-neutral-900 font-poppins min-h-[110vh] flex flex-col justify-between'>
+      })
+      dispatch(remove())
+    }
+    
+    const toggleHandler = () => {
+      setTotal(0)
+      setToggle(!toggle)
+      cartArray.map((item) => item.size === 'half' ? setTotal(old => old + item.options.half*item.amount) : setTotal(old => old + item.options.full*item.amount) )
+      
+    }
+    
+    return (
+      <div className='bg-neutral-900 font-poppins min-h-[110vh] flex flex-col justify-between'>
       <div className='pb-10'>
         <Navbar/>
-        <div className='text-neutral-200 text-4xl font-medium mt-4 ml-4'> Cart</div>
+        <div className='flex items-center justify-between mt-7'>
+          <div className='text-neutral-200 text-4xl font-medium ml-4'> Cart</div>
+          <div className='pr-9'><motion.div whileTap={{scale:0.97}} className='bg-theme w-fit px-4 py-2 rounded-lg cursor-pointer' onClick={toggleHandler}>Place Order</motion.div></div>
+        </div>
         
         <div className=' sm:mx-8 flex flex-col items-center 2md:grid 2xl:grid-cols-3 2md:grid-cols-2 2md:gap-7 pb-10'>
           {cartArray && cartArray.map((items, index) => (
@@ -77,12 +89,21 @@ function Cart() {
             </div>
             ))}
         </div>
-        <div className='px-9'><motion.div whileTap={{scale:0.97}} className='bg-theme w-fit ml-auto px-4 py-2 rounded-lg cursor-pointer' onClick={toggleHandler}>Place Order</motion.div></div>
-        {toggle ? <div></div> :
-          <div className='fixed top-0 flex justify-center items-center  w-[100vw] h-[100vh] z-20 backdrop-blur-3xl'>
-            <Order setPlaced={setPlaced} cartArray={cartArray} total={total} setToggle={setToggle} toggle={toggle} />
-          </div>
-        }
+         
+        <AnimatePresence>
+          {!toggle &&
+            <div className='fixed top-0 flex justify-center items-center  w-[100vw] h-[100vh] z-20 backdrop-blur-3xl'>
+              <motion.div 
+                initial="hidden" 
+                animate="visible" 
+                variants={animate}
+                transition={{duration:0.3, type:"spring"}}
+              >
+                <Order setPlaced={setPlaced} cartArray={cartArray} total={total} setToggle={setToggle} toggle={toggle} />
+              </motion.div>
+            </div>
+          }
+        </AnimatePresence>
 
         {placed && 
           <div className='fixed top-0 flex justify-center items-center w-[100vw] h-[100vh] z-20 backdrop-blur-3xl'>

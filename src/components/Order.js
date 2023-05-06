@@ -36,7 +36,8 @@ const PlaceOrder = async(e) => {
         payment:'cash',
         status:'Order Places',
         phone:Phone,
-        total:total
+        total:total,
+        token:localStorage.getItem('token')
     }).then(res => {
         res.data.sucess === true && setToggle(old => !old)
         res.data.sucess === true && setPlaced(old => !old) 

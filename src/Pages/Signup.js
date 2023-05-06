@@ -1,17 +1,13 @@
-import React,{ useState} from "react";
+import React,{ useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import { RxCross2 } from 'react-icons/rx'
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
 import Url from "../Url";
-import Cookies from 'js-cookie'
-
-
 
 function Signup() {
   const navigate = useNavigate();
-
   const [name, setName ] = useState('')
   const [email, setEmail ] = useState('')
   const [password, setPassword ] = useState('')
@@ -43,7 +39,7 @@ function Signup() {
         })
       });
       const data = await response.json();
-      Cookies.set('token',data.token)
+      localStorage.setItem('token',data.token)
   
       if(data.sucess){
         localStorage.setItem('email',data.info.email)
