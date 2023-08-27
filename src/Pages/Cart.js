@@ -11,6 +11,7 @@ import { Player, Controls } from '@lottiefiles/react-lottie-player';
 import { MdClose } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import Footer from '../components/Footer'
+import { MetroSpinner } from 'react-spinners-kit'
 import Url from '../Url'
 
 
@@ -22,6 +23,7 @@ function Cart() {
   const [ toggle, setToggle ] = useState(true)
   const [placed, setPlaced ] = useState(false)
   const [total, setTotal ] = useState(0)
+  const [loading, setLoading] = useState(false)
 
   const animate = {
     hidden:{
@@ -45,11 +47,13 @@ function Cart() {
   },[item])
 
   const RemoveHandler = async(id) => {
+    setLoading(true)
     await axios.put(`${Url}/decart`,{
         email: localStorage.getItem('email'),
         id: id
       })
       dispatch(remove())
+      setLoading(false)
     }
     
     const toggleHandler = () => {
@@ -61,7 +65,7 @@ function Cart() {
     
     return (
       <div className='bg-neutral-900 font-poppins min-h-[110vh] flex flex-col justify-between'>
-      <div className='pb-10'>
+      <div className='pb-10 relative'>
         <Navbar/>
         <div className='flex items-center justify-between mt-7'>
           <div className='text-neutral-200 text-4xl font-medium ml-4'> Cart</div>
@@ -82,7 +86,9 @@ function Cart() {
                     <div className='scale-[0.9] xxs:scale-[1] bg-theme text-sm xxs:text-base w-[5.5rem] xxs:w-[7rem] text-center py-3 rounded-l-xl rounded-tr-xl'>Amount= {items.amount}</div>
                     <div className='scale-[0.9] xxs:scale-[1] bg-theme text-sm xxs:text-base w-[5.5rem] xxs:w-[7rem] text-center py-3 rounded-tl-xl rounded-r-xl'>Size= {items.size}</div>
                     <div className='scale-[0.9] xxs:scale-[1] bg-theme text-sm xxs:text-base w-[5.5rem] xxs:w-[7rem] text-center py-3 rounded-l-xl rounded-br-xl flex items-center justify-center'>Total=<BiRupee/>{(items.size === 'half')? items.options.half*items.amount : items.options.full*items.amount}</div>
-                    <motion.div whileTap={{scale:0.96}} className='scale-[0.9] xxs:scale-[1] bg-red-600 hover:outline hover:outline-1 text-sm xxs:text-base w-[5.5rem] xxs:w-[7rem] text-center py-3 rounded-r-xl rounded-bl-xl cursor-pointer text-white' onClick={() => RemoveHandler(items.id)}>Remove</motion.div>
+                    <motion.div whileTap={{scale:0.96}} className='scale-[0.9] xxs:scale-[1] bg-red-600 hover:outline hover:outline-1 text-sm xxs:text-base w-[5.5rem] xxs:w-[7rem] text-center py-3 rounded-r-xl rounded-bl-xl flex justify-center cursor-pointer text-white' onClick={() => RemoveHandler(items.id)}>
+                      <div>Remove</div>
+                    </motion.div>
                   </div>
                 </div>
               </div>
@@ -129,6 +135,10 @@ function Cart() {
             </div>
         </div>
         }
+      {loading && <div className='absolute top-40 backdrop-blur-sm h-[70vh] flex flex-col items-center text-white justify-center w-full '>
+        <MetroSpinner size={55} color="#fff" />
+        <div>Removing...</div>
+      </div>}
       </div>
         <div>
           <Footer/>

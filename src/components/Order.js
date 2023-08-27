@@ -75,13 +75,13 @@ return (
                 <div>Payment</div>
                 <div className='flex justify-between mt-2'>
                     <div className=' w-[5.5rem] xxs:w-[7.5rem] sm:w-[9rem] h-[5rem] rounded-lg p-2 bg-neutral-900 flex items-center justify-center cursor-not-allowed hover:bg-opacity-95'>
-                        <img alt='Error' src='https://res.cloudinary.com/de2rges3m/image/upload/v1682090364/gofood/1200px-UPI-Logo-vector.svg_sije3o.webp' className='select-none'/>
+                        <img alt='Error' src='https://res.cloudinary.com/de2rges3m/image/upload/v1693142735/vyanjan/1200px-UPI-Logo-vector.svg_utbkgh.webp' className='select-none'/>
                     </div>
                     <div className=' w-[5.5rem] xxs:w-[7.5rem] sm:w-[9rem] h-[5rem] rounded-lg p-2 bg-neutral-900 flex items-center justify-center cursor-not-allowed hover:bg-opacity-95'>
-                        <img alt='Error' src='https://res.cloudinary.com/de2rges3m/image/upload/v1682090364/gofood/pmx-logo-mastercard-sanstext_tto67h.webp' className='select-none'/>
+                        <img alt='Error' src='https://res.cloudinary.com/de2rges3m/image/upload/v1693142735/vyanjan/pmx-logo-mastercard-sanstext_gs5cu1.webp' className='select-none'/>
                     </div>
                     <motion.div onClick={() => setcash(!cash)} whileTap={{scale:0.97}} className={` w-[5.5rem] xxs:w-[7.5rem] sm:w-[9rem] h-[5rem] rounded-lg p-2 bg-neutral-900 flex items-center justify-center ${cash ? 'outline outline-theme xxs:outline-4': ''}`}>
-                        <img alt='Error' src='https://res.cloudinary.com/de2rges3m/image/upload/v1682090364/gofood/cash-icon-29_xgkuph.png' className='w-[4rem] select-none'/>
+                        <img alt='Error' src='https://res.cloudinary.com/de2rges3m/image/upload/v1693142860/vyanjan/cash-icon-29_pqpy3k.png' className='w-[4rem] select-none'/>
                     </motion.div>
                 </div>
                 <div className='mt-3 '>

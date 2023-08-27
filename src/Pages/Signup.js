@@ -1,9 +1,11 @@
-import React,{ useEffect, useState} from "react";
+import React,{ useState} from "react";
 import { Link } from "react-router-dom";
 import { RxCross2 } from 'react-icons/rx'
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
+import { MetroSpinner } from 'react-spinners-kit'
+
 import Url from "../Url";
 
 function Signup() {
@@ -11,9 +13,11 @@ function Signup() {
   const [name, setName ] = useState('')
   const [email, setEmail ] = useState('')
   const [password, setPassword ] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const submitHandler = async(e) => {
     e.preventDefault();
+    setLoading(true)
     const response = await fetch(`${Url}/signup`,{
       method:"POST",
       headers:{
@@ -26,7 +30,7 @@ function Signup() {
       })
     });
     const json = await response.json();
-    console.log(json)
+    setLoading(false)
     if(json.succes){
       const response = await fetch(`${Url}/login`,{
         method:"POST",
@@ -88,7 +92,15 @@ function Signup() {
               </Link>
               </div>
             </div>
-            <motion.div whileTap={{scale:0.97}}><button className="bg-theme px-4 py-2 rounded-full cursor-pointer hover:outline outline-[2px]">Proceed</button></motion.div>
+            <motion.div whileTap={{scale:0.97}}>
+              <button className="bg-theme px-4 py-2 rounded-full cursor-pointer hover:outline outline-[2px]">
+                {loading ?
+                <div>Proceed</div>
+                  :
+                <div><MetroSpinner size={25} color="#fff" /></div>
+                }
+              </button>
+            </motion.div>
           </div>
         </form>
       </div>

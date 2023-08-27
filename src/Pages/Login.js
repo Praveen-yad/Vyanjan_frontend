@@ -3,15 +3,19 @@ import { Link, useNavigate } from 'react-router-dom'
 import { RxCross2 } from 'react-icons/rx'
 import { motion } from 'framer-motion'
 import Url from '../Url'
+import { MetroSpinner } from 'react-spinners-kit'
+
 
 function Login() {
   const [ email, setEmail ] = useState('')
   const [ password, setPassword ] = useState('')
   const [toggle, setToggle] = useState(false)
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
   const SubmitHandler = async(e) => {
     e.preventDefault();
+    setLoading(true)
     const response = await fetch(`${Url}/login`,{
       method:"POST",
       headers:{
@@ -23,7 +27,7 @@ function Login() {
       })
     });
     const data = await response.json();
-
+    setLoading(false)
     if(data.sucess){
       localStorage.setItem('token',data.token)
       localStorage.setItem('email',data.info.email)
@@ -61,7 +65,15 @@ function Login() {
              <span className="text-theme underline cursor-pointer">Signup</span>
             </Link>
             </div>
-            <motion.div whileTap={{scale:0.97}}><button className="bg-theme px-4 py-2 rounded-full cursor-pointer hover:outline outline-[2px]">Proceed</button></motion.div>
+            <motion.div whileTap={{scale:0.97}}>
+              <button className="bg-theme w-32 flex justify-center py-2 rounded-full cursor-pointer hover:outline outline-[2px]">
+                {!loading ? 
+                  <div>Proceed</div>
+                    :
+                  <div><MetroSpinner size={25} color="#fff" /></div>
+                }
+              </button>
+            </motion.div>
           </div>
         </form>
       </div>
