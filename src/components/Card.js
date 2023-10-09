@@ -63,13 +63,13 @@ function Card({data}){
             <div className='text-[20px] select-none mb-2'>{data.name}</div>
             <div className='text-[13px] select-none hidden sm:flex'>{data.description.slice(0,120)}</div>
             <div className='flex items-center justify-between mx-[1px] mt-5'>
-                <div className='flex bg-theme w-fit rounded-sm items-center'>
+                <div className='flex bg-neutral-800 w-fit rounded-sm items-center'>
                     <div className='px-1' onClick={() => (count > 1) && setcount((count) => count-1)}><HiMinus/></div>
                     <div className='bg-neutral-900 px-1 select-none'>{count}</div>
                     <div className='px-1' onClick={() => (count < 10) && setcount((count) => count+1)}><HiPlus/></div>
                 </div>
                 <div>
-                <select onChange={(e) => setSize(e.target.value)} className='bg-theme outline-none rounded-[4px] px-1 select-none py-0.5'>
+                <select onChange={(e) => setSize(e.target.value)} className='bg-neutral-800 outline-none rounded-[4px] px-1 select-none py-0.5'>
                         <option value={"half"} className='select-none'>Half</option>
                         <option value={"full"} className='select-none'>Full</option>
                     </select>

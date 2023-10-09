@@ -69,7 +69,7 @@ function Cart() {
         <Navbar/>
         <div className='flex items-center justify-between mt-7'>
           <div className='text-neutral-200 text-4xl font-medium ml-4'> Cart</div>
-          <div className='pr-9'><motion.div whileTap={{scale:0.97}} className='bg-theme w-fit px-4 py-2 rounded-lg cursor-pointer' onClick={toggleHandler}>Place Order</motion.div></div>
+          <div className='pr-9'><motion.div whileTap={{scale:0.97}} className='bg-neutral-700 text-white w-fit px-4 py-2 rounded-lg cursor-pointer' onClick={toggleHandler}>Place Order</motion.div></div>
         </div>
         
         <div className=' sm:mx-8 flex flex-col items-center 2md:grid 2xl:grid-cols-3 2md:grid-cols-2 2md:gap-7 pb-10'>
@@ -83,9 +83,9 @@ function Cart() {
                 <div className=' flex flex-col space-y-2'>
                   <div className='text-white mb-2 text-sm xxs:text-base'>{items.CategoryName}</div>
                   <div className='grid grid-cols-2 place-items-center scale-95 gap-x-4 gap-y-2.5 text-black'>
-                    <div className='scale-[0.9] xxs:scale-[1] bg-theme text-sm xxs:text-base w-[5.5rem] xxs:w-[7rem] text-center py-3 rounded-l-xl rounded-tr-xl'>Amount= {items.amount}</div>
-                    <div className='scale-[0.9] xxs:scale-[1] bg-theme text-sm xxs:text-base w-[5.5rem] xxs:w-[7rem] text-center py-3 rounded-tl-xl rounded-r-xl'>Size= {items.size}</div>
-                    <div className='scale-[0.9] xxs:scale-[1] bg-theme text-sm xxs:text-base w-[5.5rem] xxs:w-[7rem] text-center py-3 rounded-l-xl rounded-br-xl flex items-center justify-center'>Total=<BiRupee/>{(items.size === 'half')? items.options.half*items.amount : items.options.full*items.amount}</div>
+                    <div className='scale-[0.9] xxs:scale-[1] bg-neutral-800 text-white text-sm xxs:text-base w-[5.5rem] xxs:w-[7rem] text-center py-3 rounded-l-xl rounded-tr-xl'>Amount= {items.amount}</div>
+                    <div className='scale-[0.9] xxs:scale-[1] bg-neutral-800 text-white text-sm xxs:text-base w-[5.5rem] xxs:w-[7rem] text-center py-3 rounded-tl-xl rounded-r-xl'>Size= {items.size}</div>
+                    <div className='scale-[0.9] xxs:scale-[1] bg-neutral-800 text-white text-sm xxs:text-base w-[5.5rem] xxs:w-[7rem] text-center py-3 rounded-l-xl rounded-br-xl flex items-center justify-center'>Total=<BiRupee/>{(items.size === 'half')? items.options.half*items.amount : items.options.full*items.amount}</div>
                     <motion.div whileTap={{scale:0.96}} className='scale-[0.9] xxs:scale-[1] bg-red-600 hover:outline hover:outline-1 text-sm xxs:text-base w-[5.5rem] xxs:w-[7rem] text-center py-3 rounded-r-xl rounded-bl-xl flex justify-center cursor-pointer text-white' onClick={() => RemoveHandler(items.id)}>
                       <div>Remove</div>
                     </motion.div>
